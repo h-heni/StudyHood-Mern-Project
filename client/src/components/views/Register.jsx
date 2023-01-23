@@ -39,7 +39,7 @@ const Register = (props) => {
                     password: "",
                     confirmPassword: ""
                 })
-                navigate("/signIn")
+                navigate("/")
                 })
             
             .catch(err =>{
@@ -58,7 +58,7 @@ const Register = (props) => {
     return (
         <div className="auth-form-container">
             <div className="box">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="logo" />
+        <img className="image" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="logo" />
 
         <div>
         <h1>Register</h1>

@@ -71,5 +71,25 @@ likePost : async (req, res) => {
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
+},
+addComment:(req , res)=>{
+
+  Post.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { comments: req.body } },
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
+      .then((comment) => res.json(comment))
+      .catch((err) => res.status(400).json(err));
+},
+showAllComment:(req,res)=>{
+  Post.findById({_id:req.params.id})
+  .then(post=>post.comments.map(m=>m))
+  .catch((err) => res.status(400).json(err));
 }
+  
 }
+

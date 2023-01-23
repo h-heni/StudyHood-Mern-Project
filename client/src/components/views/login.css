@@ -60,7 +60,7 @@ color: rgb(122, 125, 132);
 .box{
     display: flex;
 }
-img {
+.image {
     height: 20rem;
     margin:auto 30px auto 0 ;
     position: relative;

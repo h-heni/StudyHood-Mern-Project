@@ -10,29 +10,30 @@ import FlexBetween from "./FlexBetween";
 import WidgetWrapper from "./WidgetWrapper";
 import { useSelector } from "react-redux";
 import React ,{ useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
-const UserWidget = ({ userId, picturePath }) => {
-  const [user, setUser] = useState(null);
+const UserWidget = () => {
+  // const [user, setUser] = useState(null);
   const { palette } = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user);
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
+  const [show , setShow]=useState(false)
+  // const getUser = async () => {
+  //   const response = await fetch(`http://localhost:8000/api/${userId}`, {
+  //     method: "GET",
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   });
+  //   const data = await response.json();
+  //   setUser(data);
+  // };
 
-  const getUser = async () => {
-    const response = await fetch(`http://localhost:8000/api/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await response.json();
-    setUser(data);
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // useEffect(() => {
+  //   getUser();
+  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!user) {
     return null;
@@ -46,6 +47,7 @@ const UserWidget = ({ userId, picturePath }) => {
     viewedProfile,
     impressions,
     friends,
+    _id,
   } = user;
 
   return (
@@ -54,10 +56,10 @@ const UserWidget = ({ userId, picturePath }) => {
       <FlexBetween
         gap="0.5rem"
         pb="1.1rem"
-        onClick={() => navigate(`/profile/${userId}`)}
+        onClick={() => navigate(`/profile/${user._id}`)}
       >
         <FlexBetween gap="1rem">
-          <UserImage image={picturePath} />
+          <UserImage />
           <Box>
             <Typography
               variant="h4"
@@ -141,8 +143,15 @@ const UserWidget = ({ userId, picturePath }) => {
               <Typography color={medium}>Network Platform</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+
+          <EditOutlined sx={{ color: main }} onClick={()=>setShow(true)}/>
         </FlexBetween>
+       
+          {show? <Box> 
+            <input></input>
+            <button onClick={()=>setShow(false)}>update</button>
+          </Box>: null}
+        
       </Box>
     </WidgetWrapper>
   );

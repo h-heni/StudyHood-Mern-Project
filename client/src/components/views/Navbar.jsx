@@ -50,6 +50,7 @@ const Navbar = () => {
         <Typography
           fontWeight="bold"
           fontSize="clamp(1rem, 2rem, 2.25rem)"
+          fontFamily='"Proxima Nova", sans-serif'
           color="primary"
           onClick={() => navigate("/home")}
           sx={{
@@ -59,7 +60,7 @@ const Navbar = () => {
             },
           }}
         >
-          Sociopedia
+          StudyHood
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
@@ -198,3 +199,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+// how to set font family in Typography material ui?

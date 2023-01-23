@@ -71,5 +71,16 @@ res.status(200).json(formattedFriends);
 } catch (err) {
 res.status(404).json({ message: err.message });
 }
-}
+},
+UpdateUser : async (req, res) => {
+    try {
+    const users = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+        new: true,
+        runValidators: true,
+      })
+    res.status(200).json(users);
+    } catch (err) {
+    res.status(404).json({ message: err.message });
+    }
+    }
 }
